@@ -1,15 +1,56 @@
 const inquirer = require("inquirer");
-const { listenerCount } = require("process");
-const internal = require("stream");
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-const team = []
-function input() {
-    console.log("Welcome. Manager input");
+// const team = []
+
+function startGenerator() {
+    console.log("Welcome Manager! Ready to build your team? Let's start with some of your information.");
     inquirer
         .prompt([
+            {
+                type: "input",
+                name: "officeNumber",
+                message: "What is your office number? (Required)",
+                //makes answer required
+                validate: officeNumberInput => {
+                    if (officeNumberInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter your office number!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "name",
+                message: "What is your name? (Required)",
+                //makes answer required
+                validate: nameInput => {
+                    if (nameInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter your name!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your employee id? (Required)",
+                //makes answer required
+                validate: idInput => {
+                    if (idInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter your employee id!');
+                        return false;
+                    }
+                }
+            },
             {
                 type: "input",
                 name: "email",
@@ -25,12 +66,20 @@ function input() {
                 }
             },
             {
-                type: "input",
-                name: "contact",
-                message: "If there is another way you would like to be contacted regarding questions about your repository, please enter those instructions here."
+                type: "confirm",
+                name: "confirmAddMember",
+                message: "Would you like to add another member to your team? (Required)",
+                //makes answer required
+                validate: confirmAddMemberInput => {
+                    if (confirmAddMemberInput) {
+                        return true;
+                    } else {
+                        console.log('Select YES to add another team member or select NO to finalize your team!');
+                        return false;
+                    }
+                }
             }
-        ]
-        )
+        ])
         .then((answers) => {
             manager = new Manager()
             promptTeamMembers()
@@ -41,8 +90,8 @@ function input() {
 //pseudocode for later
 
 // // you're promptTeamMembers()
-// what action do you wanna take? make a new internal, employyee, enginner
-// prmpt them with listenerCount
+// what action do you wanna take? make a new intern, employyee, enginner
+// prmpt them with list
 // .then choice = 
 
 // switch case 
