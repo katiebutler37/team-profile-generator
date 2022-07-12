@@ -155,6 +155,7 @@ function promptTeamMember(answers) {
         .then((answers) => {
             const intern = new Intern(answers.internName, answers. internId, answers.internEmail, answers.internSchool);
             team.push(intern);
+            promptEmployeeType();
         })
     }
     if (answers.employeeType === "Engineer") {
@@ -220,27 +221,18 @@ function promptTeamMember(answers) {
         .then((answers) => {
             const engineer = new Engineer(answers.engineerName, answers. engineerId, answers.engineerEmail, answers.engineerGitHub);
             team.push(engineer);
+            promptEmployeeType();
         })
     }
     else {
-        generateHTML(team)
+        console.log(team)
+        // generateHTML(team)
     }
 }
 
 
 
 //pseudocode for later
-
-// // you're promptTeamMembers()
-// what action do you wanna take? make a new intern, employyee, enginner
-// prmpt them with list
-// .then choice = 
-
-// switch case 
-// //
-
-
-
 
 // fs.writefile('src/index.html', generateHTML(team))
 // `<DOCTYPE!
