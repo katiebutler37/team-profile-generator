@@ -3,7 +3,9 @@ const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-// const team = []
+const team = []
+
+startGenerator()
 
 function startGenerator() {
     console.log("Welcome Manager! Ready to build your team? Let's start with some of your information.");
@@ -81,9 +83,28 @@ function startGenerator() {
             }
         ])
         .then((answers) => {
-            manager = new Manager()
-            promptTeamMembers()
+            manager = new Manager(answers);
+            team.push(manager);
+            if (answers.confirmAddMember == false) {
+                return this.generateHTML(answers);
+            } else {
+                promptTeamMembers()
+            }
         })
+
+}
+
+function promptTeamMembers() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                message: "Please select the employee type of this team member.",
+                name: "employeeType",
+                choices: ["Intern", "Engineer"]
+            }
+        ])
+        .then(console.log(team))
 }
 
 
