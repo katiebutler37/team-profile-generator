@@ -1,7 +1,9 @@
+// const { default: test } = require('node:test');
+// const { string } = require('yargs');
 const Engineer = require('../lib/Engineer');
 
-test('gets an employee name', () => {
-    const employee = new Employee('Dave', '37', 'dave@yahoo.ca', 'manager');
+test('gets github username', () => {
+    const engineer = new Engineer('Dave', '37', 'dave@yahoo.ca', 'engineer');
 
-    expect(employee.getName()).toBe('Dave');
+    expect(player.getGitHub()).toEqual(expect.any(String));
 });
