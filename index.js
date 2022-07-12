@@ -1,3 +1,4 @@
+const fs = require("fs");
 const inquirer = require("inquirer");
 const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer")
@@ -5,7 +6,7 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const team = []
 
-startGenerator()
+
 
 function startGenerator() {
     console.log("Welcome Manager! Ready to build your team? Let's start with some of your information.");
@@ -13,25 +14,11 @@ function startGenerator() {
         .prompt([
             {
                 type: "input",
-                name: "officeNumber",
-                message: "What is your office number? (Required)",
-                //makes answer required
-                validate: officeNumberInput => {
-                    if (officeNumberInput) {
-                        return true;
-                    } else {
-                        console.log('You need to enter your office number!');
-                        return false;
-                    }
-                }
-            },
-            {
-                type: "input",
-                name: "name",
+                name: "managerName",
                 message: "What is your name? (Required)",
                 //makes answer required
-                validate: nameInput => {
-                    if (nameInput) {
+                validate: managerNameInput => {
+                    if (managerNameInput) {
                         return true;
                     } else {
                         console.log('You need to enter your name!');
@@ -41,11 +28,11 @@ function startGenerator() {
             },
             {
                 type: "input",
-                name: "id",
+                name: "managerId",
                 message: "What is your employee id? (Required)",
                 //makes answer required
-                validate: idInput => {
-                    if (idInput) {
+                validate: managerIdInput => {
+                    if (managerIdInput) {
                         return true;
                     } else {
                         console.log('You need to enter your employee id!');
@@ -55,11 +42,11 @@ function startGenerator() {
             },
             {
                 type: "input",
-                name: "email",
+                name: "managerEmail",
                 message: "What is your email address? (Required)",
                 //makes answer required
-                validate: emailInput => {
-                    if (emailInput) {
+                validate: managerEmailInput => {
+                    if (managerEmailInput) {
                         return true;
                     } else {
                         console.log('You need to enter your email address!');
@@ -68,44 +55,94 @@ function startGenerator() {
                 }
             },
             {
-                type: "confirm",
-                name: "confirmAddMember",
-                message: "Would you like to add another member to your team? (Required)",
+                type: "input",
+                name: "managerOfficeNumber",
+                message: "What is your office number? (Required)",
                 //makes answer required
-                validate: confirmAddMemberInput => {
-                    if (confirmAddMemberInput) {
+                validate: managerOfficeNumberInput => {
+                    if (managerOfficeNumberInput) {
                         return true;
                     } else {
-                        console.log('Select YES to add another team member or select NO to finalize your team!');
+                        console.log('You need to enter your office number!');
                         return false;
                     }
                 }
             }
         ])
         .then((answers) => {
-            manager = new Manager(answers);
+            let manager = new Manager(answers.managerOfficeNumber, answers.managerName, answers. managerId, answers.managerEmail);
             team.push(manager);
-            if (answers.confirmAddMember == false) {
-                return this.generateHTML(answers);
-            } else {
-                promptTeamMembers()
-            }
+            promptEmployeeType()
         })
-
 }
 
-function promptTeamMembers() {
+function promptEmployeeType() {
     inquirer
         .prompt([
             {
                 type: "list",
-                message: "Please select the employee type of this team member.",
+                message: "Would you like to add an intern or an engineer to your team?",
                 name: "employeeType",
-                choices: ["Intern", "Engineer"]
+                choices: ["Intern", "Engineer", "None"]
             }
         ])
-        .then(console.log(team))
+        .then((answers) => {
+            promptTeamMember(answers);
+        })
 }
+
+function promptTeamMember(answers) {
+    if (answers.employeeType === "Intern") {
+        return inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "internName",
+                message: "What is your intern's name? (Required)",
+                //makes answer required
+                validate: internNameInput => {
+                    if (internNameInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the name of your intern!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "internId",
+                message: "What is your intern's employee id? (Required)",
+                //makes answer required
+                validate: internIdInput => {
+                    if (internIdInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the employee id for your intern!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "internEmail",
+                message: "What is your intern's email address? (Required)",
+                //makes answer required
+                validate: internEmailInput => {
+                    if (internEmailInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the email address for your intern!');
+                        return false;
+                    }
+                }
+            },
+            
+
+        ])
+    }
+}
+
 
 
 //pseudocode for later
@@ -139,3 +176,5 @@ function promptTeamMembers() {
 //     team.forEach(member => if member.getRole() == "Manager")
 //     return ``
 // }
+
+startGenerator()
