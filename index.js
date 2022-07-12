@@ -70,7 +70,7 @@ function startGenerator() {
             }
         ])
         .then((answers) => {
-            let manager = new Manager(answers.managerOfficeNumber, answers.managerName, answers. managerId, answers.managerEmail);
+            const manager = new Manager(answers.managerOfficeNumber, answers.managerName, answers. managerId, answers.managerEmail);
             team.push(manager);
             promptEmployeeType()
         })
@@ -137,9 +137,93 @@ function promptTeamMember(answers) {
                     }
                 }
             },
-            
-
+            {
+                type: "input",
+                name: "internSchool",
+                message: "What educational institution does your intern attend? (Required)",
+                //makes answer required
+                validate: internSchoolInput => {
+                    if (internSchoolInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the school that your intern goes to!');
+                        return false;
+                    }
+                }
+            }
         ])
+        .then((answers) => {
+            const intern = new Intern(answers.internName, answers. internId, answers.internEmail, answers.internSchool);
+            team.push(intern);
+        })
+    }
+    if (answers.employeeType === "Engineer") {
+        return inquirer
+        .prompt ([
+            {
+                type: "input",
+                name: "engineerName",
+                message: "What is your engineer's name? (Required)",
+                //makes answer required
+                validate: engineerNameInput => {
+                    if (engineerNameInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the name of your engineer!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "engineerId",
+                message: "What is your engineer's employee id? (Required)",
+                //makes answer required
+                validate: engineerIdInput => {
+                    if (engineerIdInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the employee id for your engineer!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "engineerEmail",
+                message: "What is your engineer's email address? (Required)",
+                //makes answer required
+                validate: engineerEmailInput => {
+                    if (engineerEmailInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the email address for your engineer!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "engineerGitHub",
+                message: "What is your engineer's GitHub account? (Required)",
+                //makes answer required
+                validate: engineerGitHubInput => {
+                    if (engineerGitHubInput) {
+                        return true;
+                    } else {
+                        console.log('You need to enter the GitHub account associated with your engineer!');
+                        return false;
+                    }
+                }
+            }
+        ])
+        .then((answers) => {
+            const engineer = new Engineer(answers.engineerName, answers. engineerId, answers.engineerEmail, answers.engineerGitHub);
+            team.push(engineer);
+        })
+    }
+    else {
+        generateHTML(team)
     }
 }
 
