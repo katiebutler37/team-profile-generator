@@ -1,7 +1,7 @@
 const Intern = require('../lib/Intern');
 
 test('gets school', () => {
-    const intern = new Intern('Dave', '37', 'dave@yahoo.ca');
+    const intern = new Intern('Dave', '37', 'dave@yahoo.ca', 'Western University');
 
     expect(intern.getSchool()).toEqual(expect.any(String));
 });
@@ -9,5 +9,5 @@ test('gets school', () => {
 test('gets an intern role', () => {
     const intern = new Intern('Dave', '37', 'dave@yahoo.ca');
 
-    expect(intern.getRole()).toBe(("intern"));
+    expect(intern.getRole()).toBe(("Intern"));
 });
