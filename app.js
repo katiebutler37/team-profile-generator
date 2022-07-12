@@ -225,15 +225,7 @@ function promptTeamMember(answers) {
             })
     }
     else {
-        console.log(team)
-        // generateHTML(team)
-    }
-}
-
-// Function call to initialize app
-startPrompts()
-    .then((team) => {
-        //callback function the writes README file
+        console.log("Webpage generated! Please see index.html to review your team.")
         fs.writeFile('./dist/index.html', generateHTML(team), err => {
             if (err) throw err;
             //index file can be found in the dist folder    
@@ -242,7 +234,11 @@ startPrompts()
             // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
             if (err) throw err;
         });
-    });
+    }
+}
+
+// Function call to initialize app
+startPrompts()
 
 
 //pseudocode for later
