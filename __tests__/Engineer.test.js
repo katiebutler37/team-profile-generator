@@ -3,7 +3,13 @@
 const Engineer = require('../lib/Engineer');
 
 test('gets github username', () => {
-    const engineer = new Engineer('Dave', '37', 'dave@yahoo.ca', 'engineer');
+    const engineer = new Engineer('Dave', '37', 'dave@yahoo.ca');
 
-    expect(player.getGitHub()).toEqual(expect.any(String));
+    expect(engineer.getGitHub()).toEqual(expect.any(String));
+});
+
+test('gets an engineer role', () => {
+    const engineer = new Engineer('Dave', '37', 'dave@yahoo.ca');
+
+    expect(engineer.getRole()).toBe(("engineer"));
 });
