@@ -14,7 +14,7 @@ function getManager (team) {
                    ID: ${team[0].getId()}
                 </div>
                 <div class="employee-content email">
-                   Email: ${team[0].getEmail()}
+                   Email: <a href = "mailto:${team[0].getEmail()}">${team[0].getEmail()}</a>
                 </div>
                 <div class="employee-content office-number">
                    Office number: ${team[0].getOfficeNumber()}
@@ -24,18 +24,11 @@ function getManager (team) {
     `;
 };
 
-// function checkIntern (team) {
-//     team.forEach(member => {
-//         if (member.getRole() == "Intern") {
-//             return internName, internId, internEmail, internSchool;
-//         }
-//     })
-// }
 function getInterns (team) {
-    // const interns = team.filter(checkIntern)
+    let internHTML = "";
     team.forEach(intern => {
-        if (intern.getRole() == "Intern") {
-            return `
+        if (intern.getRole() === "Intern") {
+            internHTML += `
             <article class="card">
             <div class="employee-heading">
                <h2 class="name">
@@ -50,22 +43,27 @@ function getInterns (team) {
                   ID: ${intern.getId()}
                </div>
                <div class="employee-content email">
-                  Email: ${intern.getEmail()}
+                  Email: <a href = "mailto:${intern.getEmail()}">${intern.getEmail()}</a>
                </div>
                <div class="employee-content school">
-                  Office number: ${intern.getSchool()}
+                  School: ${intern.getSchool()}
                </div>
             </div>
          </article>
             `
         }
+        else {
+            internHTML += ""
+        }
     })
+    return internHTML
 }
 
 function getEngineers (team) {
+    let engineerHTML = "";
     team.forEach(engineer => {
-        if (engineer.getRole() == "Engineer") {
-            return `
+        if (engineer.getRole() === "Engineer") {
+            engineerHTML += `
             <article class="card">
             <div class="employee-heading">
                <h2 class="name">
@@ -80,21 +78,20 @@ function getEngineers (team) {
                   ID: ${engineer.getId()}
                </div>
                <div class="employee-content email">
-                  Email: ${engineer.getEmail()}
+                  Email: <a href = "mailto:${engineer.getEmail()}">${engineer.getEmail()}</a>
                </div>
                <div class="employee-content github">
-                  Office number: ${engineer.getGitHub()}
+                  GitHub: <a href = "https://github.com/${engineer.getGitHub()}">${engineer.getGitHub()}</a>
                </div>
             </div>
          </article>
             `
+        } else {
+            engineerHTML += ""
         }
     })
+    return engineerHTML
 }
-// getManagers(){
-//     team.forEach(member => if member.getRole() == "Manager")
-//     return ``
-// }
 
 module.exports = generateHTML = team => {
     return `
@@ -125,6 +122,3 @@ module.exports = generateHTML = team => {
     `;
   };
   
-//   ${getManager(team)}
-//   ${getInterns(team)}
-//   ${getEngineers(team)}

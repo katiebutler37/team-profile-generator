@@ -70,7 +70,7 @@ function startPrompts() {
             }
         ])
         .then((answers) => {
-            const manager = new Manager(answers.managerOfficeNumber, answers.managerName, answers.managerId, answers.managerEmail);
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
             team.push(manager);
             promptEmployeeType()
         })
