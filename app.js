@@ -241,24 +241,4 @@ function promptTeamMember(answers) {
 startPrompts()
 
 
-//pseudocode for later
-
-
-// `<DOCTYPE!
-
-
-// <HEAD>
-
-// BODY
-// <HEADER>
-// <SECTIONS>
-// ${getManagers(team)}
-// ${getEngineers(team)}
-// `
-// ${}
-
-// getManagers(){
-//     team.forEach(member => if member.getRole() == "Manager")
-//     return ``
-// }
 
