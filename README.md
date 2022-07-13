@@ -29,9 +29,9 @@ To get started building your professional team with the Team Profile Generator..
 5. Adjust as desired for further customization.
 6. Copy the file along with its CSS stylesheet and add it wherever you'd like!
 
-![README Generator Command Line](./images/command-line.png)
+![Team Profile Generator Command Line](./images/node-app.png)
 
-![README Generator Result](./images/result.png)
+![Team Profile Generator Result](./images/HTML-webpage.png)
  
 ## License
 This project is not licensed.

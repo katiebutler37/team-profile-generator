@@ -1,4 +1,6 @@
 function getManager (team) {
+    // getManager grabs data from the first object in the teams array since this application always starts with manager and includes one manager
+    //returns HTML to generate a card with dynamically inputted name, id, email and officenumber
     return `
     <article class="card">
              <div class="employee-heading">
@@ -25,7 +27,9 @@ function getManager (team) {
 };
 
 function getInterns (team) {
+    //set intern HTML sections to an emppty string
     let internHTML = "";
+    //for each employee in which getRole() returns Intern, this HTML is added (+=) to the HTML to allow multiple interns
     team.forEach(intern => {
         if (intern.getRole() === "Intern") {
             internHTML += `
@@ -53,6 +57,7 @@ function getInterns (team) {
             `
         }
         else {
+            //otherwise nothing is added
             internHTML += ""
         }
     })
@@ -60,7 +65,9 @@ function getInterns (team) {
 }
 
 function getEngineers (team) {
+    //sets engineer HTML to an empty string
     let engineerHTML = "";
+    //for each employee in which getRole() returns Engineer, this HTML is added (+=) to the HTML to allow multiple engineers
     team.forEach(engineer => {
         if (engineer.getRole() === "Engineer") {
             engineerHTML += `
@@ -87,12 +94,14 @@ function getEngineers (team) {
          </article>
             `
         } else {
+            //otherwise it remains an empty string
             engineerHTML += ""
         }
     })
     return engineerHTML
 }
 
+//takes in team data, formatted in the above functions to generate the final HTML template for the full page
 module.exports = generateHTML = team => {
     return `
     <!DOCTYPE html>

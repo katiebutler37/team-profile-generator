@@ -1,3 +1,4 @@
+/* GENERAL STYLING */
 * {
     box-sizing: border-box;
   }
@@ -8,6 +9,7 @@ body {
     font-size: medium;
 }
 
+/* HEADER STYLING */
 header {
     background-color: rgb(244, 79, 79);
     color: white;
@@ -16,6 +18,7 @@ header {
     text-align: center;
 }
 
+/* MAIN PAGE STYLING */
 main {
     display: flex;
     flex-wrap: wrap;
@@ -23,6 +26,7 @@ main {
     margin: 40px;
 }
 
+/* EMPLOYEE CARD STYLING */
 .card {
     margin: 20px;
     border-radius: 2px;

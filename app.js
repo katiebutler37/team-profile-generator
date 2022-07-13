@@ -1,9 +1,12 @@
+//all of the packages, modules, files this file will need access to
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Employee = require("./lib/Employee");
+//not necessary since the Engineer, Intern and Manager classes extend the data they need from Employee
+// const Employee = require("./lib/Employee");
 const Engineer = require("./lib/Engineer")
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
+//start team off as an empty array that we will push data into as we move through the application
 const team = []
 //connects to generateHTML.js to pass data
 const generateHTML = require('./utils/generateHTML.js');
@@ -70,12 +73,16 @@ function startPrompts() {
             }
         ])
         .then((answers) => {
+            //collect answer data (in the same order that the properties are set up in the constructor) and create a new Manager to store those inputs
             const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+            //add to the overall team array
             team.push(manager);
+            //call menu to add engineer, intern, or finish webpage
             promptEmployeeType()
         })
 }
 
+//menu to add engineer, intern or finish webpage
 function promptEmployeeType() {
     inquirer
         .prompt([
@@ -92,6 +99,7 @@ function promptEmployeeType() {
 }
 
 function promptTeamMember(answers) {
+    //if Intern was selcted, these prompts will be presented
     if (answers.employeeType === "Intern") {
         return inquirer
             .prompt([
@@ -153,11 +161,15 @@ function promptTeamMember(answers) {
                 }
             ])
             .then((answers) => {
+                //capture data and store it in a new intern object
                 const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+                //add new intern obj to the team array
                 team.push(intern);
+                //return to menu
                 promptEmployeeType();
             })
     }
+    //if Engineer was selcted, these prompts will be presented
     if (answers.employeeType === "Engineer") {
         return inquirer
             .prompt([
@@ -219,19 +231,22 @@ function promptTeamMember(answers) {
                 }
             ])
             .then((answers) => {
+                //capture data and store it in a new engineer object
                 const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGitHub);
+                //add engineer obj to team array
                 team.push(engineer);
+                //return to menu
                 promptEmployeeType();
             })
     }
+    //if None was selcted, the manager is finished (no more team members) and the webpage will generate
     else {
-        console.log("Webpage generated! Please see index.html to review your team.")
+        console.log("Webpage generated! Please see the index.html file in the dist folder to review your team.")
         fs.writeFile('./dist/index.html', generateHTML(team), err => {
-            if (err) throw err;
-            //index file can be found in the dist folder    
+            if (err) throw err;    
         });
         fs.copyFile('./src/style.css', './dist/style.css', err => {
-            // if there's an error, reject the Promise and send the error to the Promise's `.catch()` method
+            // if there's an error
             if (err) throw err;
         });
     }
