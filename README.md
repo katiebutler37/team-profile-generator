@@ -23,13 +23,13 @@ To install the project repository, please follow these steps:
 ## Usage
 To get started building your professional team with the Team Profile Generator...
 1. Open the repository and complete installation instructions.
-2. Enter ```node app ```into the command line terminal.
+2. Enter ```node index.js ```into the command line terminal.
 3. Follow all prompt instructions to answer the questions carefully.
 4. After the final question is answered, go into the "dist" directory to find your newly generated index.html!
 5. Adjust as desired for further customization.
 6. Copy the file along with its CSS stylesheet and add it wherever you'd like!
 
-![Team Profile Generator Command Line](./images/node-app.png)
+![Team Profile Generator Command Line](./images/node-index.png)
 
 ![Team Profile Generator Result](./images/HTML-webpage.png)
  
