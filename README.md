@@ -32,7 +32,9 @@ To get started building your professional team with the Team Profile Generator..
 ![Team Profile Generator Command Line](./images/node-index.png)
 
 ![Team Profile Generator Result](./images/HTML-webpage.png)
- 
+
+https://user-images.githubusercontent.com/103510105/178730477-9568346c-e9b7-4cbb-a48c-ce995d816ce0.mp4
+
 ## License
 This project is not licensed.
 
